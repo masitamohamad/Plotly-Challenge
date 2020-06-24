@@ -24,7 +24,7 @@ function init() {
     };
 
 init();
-// ===========================================================================================
+// ====================================================================================================================
 // Dropdown select handler
 
 d3.selectAll("#selDataset").on("change", buildPlots);
@@ -37,7 +37,7 @@ function buildPlots() {
 
 buildPlots();
 
-// ===========================================================================================
+// ====================================================================================================================
 // Populate metadata info of selected ID inside div class="panel-body" by using .filter and appending <p> tags to html
 
 function metadataPanel(selectedID) {
@@ -70,7 +70,7 @@ function metadataPanel(selectedID) {
     });
 };
 
-// ===========================================================================================
+// ====================================================================================================================
 // Create a horizontal bar chart 
 // Create the data array for the plot 
 // Define the plot layout
