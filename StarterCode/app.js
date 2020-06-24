@@ -1,5 +1,5 @@
 // Use D3 to read external JSON file
-// Create an init function to select the dropdown id from HTML and populate the dropdown list using forEach loop
+// Create an init function that selects the dropdown id from HTML and populates the dropdown list using forEach loop
 
 function init() {
     d3.json("data/samples.json").then((importedData) => {
