@@ -1,5 +1,5 @@
 // Use D3 to read external JSON file
-// Create an init function to use D3 to select the dropdown id from HTML and populate the dropdown list using forEach loop
+// Create an init function to select the dropdown id from HTML and populate the dropdown list using forEach loop
 
 function init() {
     d3.json("data/samples.json").then((importedData) => {
@@ -38,7 +38,7 @@ function buildPlots() {
 buildPlots();
 
 // ====================================================================================================================
-// Populate metadata info of selected ID inside div class="panel-body" by using .filter and appending <p> tags to html
+// Populate metadata info of selected ID inside div class="panel-body" by using .filter and appending <p> tags to HTML
 
 function metadataPanel(selectedID) {
     console.log(selectedID)
