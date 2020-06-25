@@ -32,7 +32,7 @@ d3.selectAll("#selDataset").on("change", buildPlots);
 function buildPlots() {
     var selectedID = d3.select("#selDataset").node().value;
     metadataPanel(selectedID);
-    // barChart(selectedID);
+    barChart(selectedID);
 };
 
 buildPlots();
@@ -72,11 +72,62 @@ function metadataPanel(selectedID) {
 
 // ====================================================================================================================
 // Create a horizontal bar chart 
-// Create the data array for the plot 
-// Define the plot layout
-// Render the plot to the div tag with id "bar"
+// Prepare chart data by using map() to create two new arrays that return (1) otu_ids (y-axis) and (2) sample_values (x-axis)
+// Use slice() to grab the first 10 OTUs from json object. sample_values arrays are in descending order.
+// Define the plot layout and render the plot to the div tag with id "bar"
 
-// function barChart(selectedID)
+function barChart(selectedID) {
 
+d3.json("data/samples.json").then((importedData) => {
+    var data = importedData;
+    
+    var chartFilteredData = data.samples.filter(name => name.id == selectedID);
+    console.log(chartFilteredData[0]);
 
+    /* Sample data at index 0
+    {id: "962", otu_ids: Array(26), sample_values: Array(26), otu_labels: Array(26)}
+    */
 
+    // Y values:
+    var otuIDs = chartFilteredData.map(value => value.otu_ids);
+    // console.log(otuIDs)
+    var yValues = otuIDs[0].slice(0, 10);
+    //console.log(yValues)
+    var yValueslabels = [];
+    yValues.forEach(function(item) {
+        yValueslabels.push(`OTU ${item}`)
+    });
+    // console.log(yValueslabels)
+
+    // X values:
+    var otuIDsFreq = chartFilteredData.map(value => value.sample_values);
+    // console.log(otuIDsFreq)
+    var xValues = otuIDsFreq[0].slice(0, 10);
+    // console.log(xValues)
+
+    // Hovertext:
+    var hoverText = chartFilteredData.map(value => value.otu_labels);
+    var top10hoverText = hoverText[0].slice(0, 10);
+    // console.log(top10hoverText)
+
+    // Trace, layout and plot
+    var trace = {
+        x: xValues,
+        y: yValueslabels,
+        text: top10hoverText,
+        type: "bar",
+        orientation: "h"
+      };
+
+    var layout = {
+        title: 'Top 10 OTUs',
+        yaxis: {
+        autorange: "reversed"
+        }
+      };
+
+    var plotData = [trace];
+    Plotly.newPlot("bar", plotData, layout);
+
+    });
+};
