@@ -173,10 +173,10 @@ function bubbleChart(selectedID) {
 
         var bubbleData = [bubbleTrace];
   
-  var bubbleLayout = {
-    title: 'OTU Frequency',
-    showlegend: false,
-  };
+        var bubbleLayout = {
+            title: 'OTU Frequency',
+            showlegend: false,
+        };
   
   Plotly.newPlot('bubble', bubbleData, bubbleLayout);
     })
