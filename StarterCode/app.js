@@ -144,7 +144,7 @@ function bubbleChart(selectedID) {
     var data = importedData;
 
     var bubbleChartFilter = data.samples.filter(name => name.id == selectedID);
-    console.log(bubbleChartFilter[0]);
+    // console.log(bubbleChartFilter[0]);
 
     // X values:
     var otuIDs = bubbleChartFilter.map(value => value.otu_ids);
@@ -188,19 +188,48 @@ function bubbleChart(selectedID) {
 
 function gaugeChart(selectedID) {
     d3.json("data/samples.json").then((importedData) => {
-        var data = importedData;
+        var gaugeData = importedData;
+        var gaugeFilter = gaugeData.metadata.filter(name => name.id == selectedID);
+        // console.log(gaugeFilter[0]);
+        var washFreq = gaugeFilter[0].wfreq
+        // console.log(washFreq)
 
     var data = [
 	    {
 	    domain: { x: [0, 1], y: [0, 1] },
-	    value: 270,
-	    title: { text: "Belly Button Washing Frequency" },
+	    value: washFreq,
+        title: {
+            text:
+            "Belly Button Washing Frequency<br><span style='font-size:0.8em;color:gray'>Scrubs Per Week</span><br>",
+            font: { size: 18 }
+        },
+
 	    type: "indicator",
-	    mode: "gauge+number"
-	    }
+        mode: "gauge+number",
+  
+        gauge: {
+            axis: {
+                range: [0, 10],
+                tickvals: [0, 2, 4, 6, 8, 10],
+                ticks: "outside"
+            },
+
+            steps: [
+                { range: [0, 2], color: "rgba(183, 28, 28, .5)" },
+                { range: [2, 4], color: "rgba(249, 168, 37, .5)" },
+                { range: [4, 6], color: "rgba(170, 202, 42, .5)" },
+                { range: [6, 8], color: "rgba(110, 154, 22, .5)" },
+                { range: [8, 10], color: "rgba(14, 127, 0, .5)" },
+            ],
+
+            bar: { color: "black" },
+        }
+        }
     ];
 
-    var layout = { margin: { t: 0, b: 0 } };
+    var layout = { 
+        margin: { t: 0, b: 0 }
+    };
 
     Plotly.newPlot('gauge', data, layout);
     });
