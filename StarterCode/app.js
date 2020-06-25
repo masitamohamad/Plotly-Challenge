@@ -113,23 +113,24 @@ function barChart(selectedID) {
     var top10hoverText = hoverText[0].slice(0, 10);
     // console.log(top10hoverText)
 
-    // Trace, layout and plot
-    var trace = {
-        x: xValues,
-        y: yValueslabels,
-        text: top10hoverText,
-        type: "bar",
-        orientation: "h"
-      };
+        // Trace, layout and plot
+        var trace = {
+            x: xValues,
+            y: yValueslabels,
+            text: top10hoverText,
+            type: "bar",
+            orientation: "h"
+        };
 
-    var layout = {
-        title: 'Top 10 Operational Taxonomic Units (OTUs)',
-        yaxis: {
-        autorange: "reversed"
-        }
-      };
+        var layout = {
+            title: 'Top 10 Operational Taxonomic Units (OTUs)',
+            yaxis: {
+            autorange: "reversed"
+            }
+        };
 
-    var plotData = [trace];
+        var plotData = [trace];
+
     Plotly.newPlot("bar", plotData, layout);
     });
 };
@@ -189,18 +190,18 @@ function gaugeChart(selectedID) {
     d3.json("data/samples.json").then((importedData) => {
         var data = importedData;
 
-var data = [
-	{
-		domain: { x: [0, 1], y: [0, 1] },
-		value: 270,
-		title: { text: "Belly Button Washing Frequency" },
-		type: "indicator",
-		mode: "gauge+number"
-	}
-];
+    var data = [
+	    {
+	    domain: { x: [0, 1], y: [0, 1] },
+	    value: 270,
+	    title: { text: "Belly Button Washing Frequency" },
+	    type: "indicator",
+	    mode: "gauge+number"
+	    }
+    ];
 
-var layout = { margin: { t: 0, b: 0 } };
-Plotly.newPlot('gauge', data, layout);
+    var layout = { margin: { t: 0, b: 0 } };
 
+    Plotly.newPlot('gauge', data, layout);
     });
 };
