@@ -236,3 +236,4 @@ function gaugeChart(selectedID) {
     Plotly.newPlot('gauge', data, layout);
     });
 };
+
