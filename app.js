@@ -4,7 +4,7 @@
 function init() {
     
     d3.json("data/samples.json").then((importedData) => {
-
+    
         var data = importedData;
         // console.log(data);
 
@@ -25,9 +25,13 @@ function init() {
     };
 
 init();
+// Initialize the page with default plots:
+
+barChart(946);
+gaugeChart(946);
+
 // ====================================================================================================================
 // Dropdown select handler
-
 
 d3.selectAll("#selDataset").on("change", buildPlots);
 
@@ -123,7 +127,7 @@ function barChart(selectedID) {
         };
 
         var layout = {
-            title: 'Top 10 Operational Taxonomic Units (OTUs)',
+            title: '<b>Top 10 Operational Taxonomic Units (OTUs)</b>',
             yaxis: {
             autorange: "reversed"
             }
@@ -175,7 +179,7 @@ function bubbleChart(selectedID) {
         var bubbleData = [bubbleTrace];
   
         var bubbleLayout = {
-            title: 'OTU Frequency',
+            title: '<b>OTU Frequency</b>',
             showlegend: false,
         };
   
@@ -195,16 +199,16 @@ function gaugeChart(selectedID) {
         // console.log(washFreq)
 
     var data = [
-	    {
-	    domain: { x: [0, 1], y: [0, 1] },
-	    value: washFreq,
+        {
+        domain: { x: [0, 1], y: [0, 1] },
+        value: washFreq,
         title: {
             text:
-            "Belly Button Washing Frequency<br><span style='font-size:0.8em;color:gray'>Scrubs Per Week</span><br>",
+            "<b>Belly Button Washing Frequency</b><br><span style='font-size:0.8em;color:gray'><i>Scrubs Per Week</i></span><br>",
             font: { size: 18 }
         },
 
-	    type: "indicator",
+        type: "indicator",
         mode: "gauge+number",
   
         gauge: {
@@ -213,7 +217,6 @@ function gaugeChart(selectedID) {
                 tickvals: [0, 2, 4, 6, 8, 10],
                 ticks: "outside"
             },
-
             steps: [
                 { range: [0, 2], color: "rgba(183, 28, 28, .5)" },
                 { range: [2, 4], color: "rgba(249, 168, 37, .5)" },
@@ -221,8 +224,7 @@ function gaugeChart(selectedID) {
                 { range: [6, 8], color: "rgba(110, 154, 22, .5)" },
                 { range: [8, 10], color: "rgba(14, 127, 0, .5)" },
             ],
-
-            bar: { color: "black" },
+            bar: { color: "gray" },
         }
         }
     ];
